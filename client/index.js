@@ -1,4 +1,6 @@
 'use strict';
 
-var dummy = require('./components/dummy-component');
-console.log(dummy.hej);
+var React = require('react');
+var App = require('./components/App');
+
+React.render(<App/>, document.body);
