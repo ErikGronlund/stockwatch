@@ -3,6 +3,6 @@
 var gulp = require('gulp');
 
 gulp.task('lint', [
-    'lint-editorconfig',
-    'lint-jshint'
+    'lint-editorconfig'/*,
+    'lint-jshint'*/
 ]);
