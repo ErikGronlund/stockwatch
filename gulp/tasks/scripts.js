@@ -6,6 +6,7 @@ var source = require('vinyl-source-stream');
 var transform = require('vinyl-transform');
 var exorcist = require('exorcist');
 var browserify = require('browserify');
+var reactify = require('reactify');
 var reload = require('browser-sync').reload;
 
 var paths = require('../paths');
@@ -13,6 +14,7 @@ var paths = require('../paths');
 var bundler = browserify({
     // Specify the entry point of your app
     entries: [paths.src.indexjs],
+    transform: [reactify],
     // Add file extensions to make optional in your requires, .js is default
     extensions: [],
     debug: true
