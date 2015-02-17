@@ -2,4 +2,4 @@
 
 var gulp = require('gulp');
 
-gulp.task('client', ['scripts', 'less', 'html']);
+gulp.task('client', ['client-scripts', 'client-less', 'client-html']);

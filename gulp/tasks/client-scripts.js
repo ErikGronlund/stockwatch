@@ -19,7 +19,7 @@ var bundler = browserify({
     debug: true
 });
 
-gulp.task('scripts', function () {
+gulp.task('client-scripts', function () {
     return bundler
         .bundle()
 
