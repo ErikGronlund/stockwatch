@@ -7,7 +7,6 @@ var transform = require('vinyl-transform');
 var exorcist = require('exorcist');
 var browserify = require('browserify');
 var reactify = require('reactify');
-var reload = require('browser-sync').reload;
 
 var paths = require('../paths');
 
@@ -38,6 +37,5 @@ gulp.task('scripts', function () {
                     paths.dest.sourcemaps + 'bundle.js.map'
             );
         }))
-        .pipe(gulp.dest(paths.dest.client))
-        .pipe(reload({stream:true}));
+        .pipe(gulp.dest(paths.dest.client));
 });
