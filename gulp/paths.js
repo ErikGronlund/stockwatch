@@ -24,17 +24,14 @@ module.exports = {
             client: 'client/**/*-test.js',
             server: 'server/**/*-test.js'
         },
-        watch: {
-            client: {
-                images: './client/**/*.{png,jpg,jpeg,gif,ico,svg,eot,ttf,woff}',
-                less: './client/**/*.less',
-                html: './client/**/*.html',
-                js: './client/**/*.js'
-            }
-        },
-        html: './client/**/*.html',
-        indexjs: './client/index.js',
-        indexless: './client/index.less'
+        client: {
+            images: './client/**/*.{png,jpg,jpeg,gif,ico,svg,eot,ttf,woff}',
+            less: './client/**/*.less',
+            html: './client/**/*.html',
+            js: './client/**/*.js',
+            indexjs: './client/index.js',
+            indexless: './client/index.less'
+        }
     },
     dest: {
         server: 'dist/',

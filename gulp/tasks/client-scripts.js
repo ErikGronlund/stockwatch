@@ -12,7 +12,7 @@ var paths = require('../paths');
 
 var bundler = browserify({
     // Specify the entry point of your app
-    entries: [paths.src.indexjs],
+    entries: [paths.src.client.indexjs],
     transform: [reactify],
     // Add file extensions to make optional in your requires, .js is default
     extensions: [],

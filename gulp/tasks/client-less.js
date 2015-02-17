@@ -8,7 +8,7 @@ var paths = require('../paths');
 
 gulp.task('client-less', function () {
     return gulp
-        .src(paths.src.indexless)
+        .src(paths.src.client.indexless)
         .pipe(less({ style: 'expanded' }))
         .pipe(gulp.dest(paths.dest.client))
         .pipe(reload({stream:true}));

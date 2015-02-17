@@ -8,7 +8,7 @@ var paths = require('../paths');
 
 gulp.task('server:start', ['dist'], function (cb) {
     server.listen({
-        cwd: 'dist/',
+        cwd: paths.dest.server,
         path: 'server.js',
         env: {
             NODE_ENV: 'development',
@@ -36,9 +36,9 @@ gulp.task('browser-sync', ['server:start'], function () {
 });
 
 gulp.task('watch', ['server:start', 'browser-sync'], function () {
-    gulp.watch(paths.src.watch.client.images, ['client', browserSync.reload]);
-    gulp.watch(paths.src.watch.client.less, ['client', browserSync.reload]);
-    gulp.watch(paths.src.watch.client.html, ['client', browserSync.reload]);
-    gulp.watch(paths.src.watch.client.js, ['unit-client', 'client', browserSync.reload]);
+    gulp.watch(paths.src.client.images, ['client', browserSync.reload]);
+    gulp.watch(paths.src.client.less, ['client', browserSync.reload]);
+    gulp.watch(paths.src.client.html, ['client', browserSync.reload]);
+    gulp.watch(paths.src.client.js, ['unit-client', 'client', browserSync.reload]);
     gulp.watch(paths.src.server, ['server:restart:browsersync']);
 });
