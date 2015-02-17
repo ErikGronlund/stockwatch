@@ -13,3 +13,7 @@ app.use(express.static(staticDir));
 app.listen(port);
 
 console.log('Serving ' + staticDir + '/ on http://localhost:' + port + '/');
+
+app.get('/login', function (req, res) {
+  res.send('Login using google');
+});
