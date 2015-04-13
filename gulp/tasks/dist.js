@@ -6,5 +6,6 @@ gulp.task('dist', [
     'lint',
     'unit',
     'server',
-    'client'
+    'client',
+    'common-components'
 ]);

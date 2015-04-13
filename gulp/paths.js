@@ -31,12 +31,16 @@ module.exports = {
             js: './client/**/*.js',
             indexjs: './client/index.js',
             indexless: './client/index.less'
+        },
+        components: {
+            js: './client/components/**/*.js'
         }
     },
     dest: {
         server: 'dist/',
         client: 'dist/client',
         indexjs: 'dist/client',
-        sourcemaps: 'dist/client/sourcemaps/'
+        sourcemaps: 'dist/client/sourcemaps/',
+        components: 'dist/components'
     }
 };
