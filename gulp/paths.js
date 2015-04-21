@@ -37,6 +37,7 @@ module.exports = {
         }
     },
     dest: {
+        all: 'dist/',
         server: 'dist/',
         client: 'dist/client',
         indexjs: 'dist/client',
