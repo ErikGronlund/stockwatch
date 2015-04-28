@@ -3,7 +3,7 @@
 var router = require('express').Router();
 
 router.get('/', function (req, res) {
-  res.send('Login using google');
+  res.render('login');
 });
 
 module.exports = router;
