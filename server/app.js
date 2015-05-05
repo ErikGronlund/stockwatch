@@ -10,6 +10,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+var mongoose = require('mongoose');
+var User = require('./lib/user/user.js');
+
 var GOOGLE_CLIENT_ID = '37422223575-gbp1smusgb1d6k1m9qjs80s97t6uv5f1.apps.googleusercontent.com';
 var GOOGLE_CLIENT_SECRET = 'aHAqRWXrX_It7bnLMm0h4n0j';
 
@@ -22,6 +25,8 @@ var stocks = require('./routes/stocks');
 
 var passport = require('passport');
 
+mongoose.connect('mongodb://localhost/stockwatch');
+
 app.use(express.static(staticDir));
 app.set('view engine', 'ejs');
 app.use(cookieParser());
@@ -31,15 +36,6 @@ app.use(session({secret: 'stockWatch', saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// TODO implement using db storage
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
-
 var StrategyGoogle = require('passport-google-openidconnect').Strategy;
 passport.use(new StrategyGoogle({
     clientID: GOOGLE_CLIENT_ID,
@@ -48,10 +44,43 @@ passport.use(new StrategyGoogle({
     userInfoURL: "https://www.googleapis.com/plus/v1/people/me"
   },
   function(iss, sub, profile, accessToken, refreshToken, done) {
-    // TODO add db storage for handling users
-    return done(null, accessToken);
+    User.findOne({ id: profile._json.id }, function (err, user) {
+      if (err) {
+        return done(err);
+      } else if (user !== null) {
+        return done(null, user);
+      } else {
+        var user = new User({
+          id: profile._json.id,
+          name: profile._json.displayName,
+          tickers: ['THULE.ST']
+        });
+
+        user.save(function (err) {
+          if (err) {
+            return done(err);
+          } else {
+            return done(null, user);
+          }
+        });
+      }
+    });
   }
 ));
+
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function (err, user) {
+    if (err) {
+      done(err);
+    } else {
+      done(null, user);
+    }
+  });
+});
 
 // routes
 app.get('/auth/google',
