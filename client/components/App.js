@@ -3,18 +3,17 @@
 var React = require('react');
 
 var Quotes = require('./quotes/Quotes');
-
-var tickers = require('./tickers');
+var quoteArrayItems = require('./quote-array-items');
 
 var YAHOO_FINANCE_URL = 'https://query.yahooapis.com/v1/public/yql';
 var PARAMS = '&format=json&env=http://datatables.org/alltables.env&callback=';
 
-function createFql() {
-  return 'q=select * from yahoo.finance.quotes where symbol in (' + tickers.getQuotedTickers().toString() + ')';
+function createFql(tickers) {
+  return 'q=select * from yahoo.finance.quotes where symbol in (' + quoteArrayItems(tickers).toString() + ')';
 }
 
-function createUrl () {
-  return YAHOO_FINANCE_URL + '?' + createFql() + PARAMS;
+function createUrl (tickers) {
+  return YAHOO_FINANCE_URL + '?' + createFql(tickers) + PARAMS;
 }
 
 function loadQuotes(url) {
@@ -39,11 +38,21 @@ function loadQuotes(url) {
 
 module.exports = React.createClass({
   getInitialState: function() {
-    return {data: []};
+    return {
+      data: [],
+      tickers: this.props.tickers || []
+    };
   },
   componentDidMount: function() {
     var that = this;
-    loadQuotes(createUrl()).then(function (quotes) {
+    loadQuotes(createUrl(this.state.tickers)).then(function (result) {
+      var quotes = [];
+      if (!Array.isArray(result)) {
+        quotes.push(result)
+      } else {
+        quotes = result;
+      }
+
       that.setState({ data: quotes});
     }, function (error) {
       console.log(error);

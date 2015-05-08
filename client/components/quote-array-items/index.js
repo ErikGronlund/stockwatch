@@ -1,6 +1,6 @@
 'use strict';
 
-var tickers = [
+/*var tickers = [
   'ALFA.ST', // Alfa Laval
   'AXFO.ST', // Axfood
   'BOL.ST', // Boliden
@@ -17,6 +17,14 @@ var tickers = [
   'SHB-B.ST', // Handelsbanken
   'SKF-B.ST',
   'THULE.ST' // Thule
-];
+];*/
 
-module.exports = tickers;
+function quoteArrayItems (array) {
+  var quotedArray = array.map(function (item) {
+    return '\"' + item + '\"'; 
+  });
+
+  return quotedArray;
+}
+
+module.exports = quoteArrayItems;
