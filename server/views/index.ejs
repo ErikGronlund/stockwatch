@@ -7,10 +7,15 @@
     <link rel="stylesheet" href="/index.css"/>
 </head>
 <body>
+  <script>
+    var STOCKWATCH_TICKERS = ["<%= tickers %>"];
+  </script>
+  
   <div class="react-content-container">
     <%- reactContent %>
   </div>
 
   <script src="/bundle.js"></script>
+
 </body>
 </html>
