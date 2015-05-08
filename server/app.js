@@ -53,7 +53,7 @@ passport.use(new StrategyGoogle({
         var user = new User({
           id: profile._json.id,
           name: profile._json.displayName,
-          tickers: ['THULE.ST']
+          tickers: ['BOL.ST', 'ALFA.ST']
         });
 
         user.save(function (err) {
