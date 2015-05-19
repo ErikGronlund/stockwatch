@@ -21,6 +21,7 @@ require("node-jsx").install();
 var staticDir = path.resolve(__dirname + '/client');
 
 var login = require('./routes/login');
+var logout = require('./routes/logout');
 var stocks = require('./routes/stocks');
 
 var passport = require('passport');
@@ -90,6 +91,7 @@ app.get('/auth/google/callback',
   passport.authenticate('google-openidconnect', { failureRedirect: '/login', successRedirect: '/' }));
 
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/', ensureAuthenticated, stocks);
 
 function ensureAuthenticated(req, res, next) {
