@@ -12,7 +12,6 @@
     "express-session": "1.11.1",
     "mongoose": "4.0.2",
     "passport": "0.2.1",
-    "passport-google": "0.3.0",
     "passport-google-openidconnect": "0.0.4"
   },
   "devDependencies": {
