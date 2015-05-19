@@ -16,6 +16,9 @@ var User = require('./lib/user/user.js');
 var GOOGLE_CLIENT_ID = '37422223575-gbp1smusgb1d6k1m9qjs80s97t6uv5f1.apps.googleusercontent.com';
 var GOOGLE_CLIENT_SECRET = 'aHAqRWXrX_It7bnLMm0h4n0j';
 
+var FACEBOOK_APP_ID = '697434750383550';
+var FACEBOOK_APP_SECRET = 'ab9c7bb908e306026793b97463b6c1da';
+
 require("node-jsx").install();
 
 var staticDir = path.resolve(__dirname + '/client');
@@ -54,7 +57,40 @@ passport.use(new StrategyGoogle({
         var user = new User({
           id: profile._json.id,
           name: profile._json.displayName,
-          tickers: ['BOL.ST', 'ALFA.ST']
+          tickers: ['GOOG', 'BOL.ST', 'ALFA.ST']
+        });
+
+        user.save(function (err) {
+          if (err) {
+            return done(err);
+          } else {
+            return done(null, user);
+          }
+        });
+      }
+    });
+  }
+));
+
+var StrategyFacebook = require('passport-facebook').Strategy;
+passport.use(new StrategyFacebook({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "http://127.0.0.1:3000/auth/facebook/callback",
+    enableProof: false,
+    profileFields: ['id', 'displayName', 'photos']
+  },
+  function (accessToken, refreshToken, profile, done) {
+    User.findOne({ id: profile._json.id }, function (err, user) {
+      if (err) {
+        return done(err);
+      } else if (user !== null) {
+        return done(null, user);
+      } else {
+        var user = new User({
+          id: profile._json.id,
+          name: profile._json.name,
+          tickers: ['FB', 'BOL.ST', 'ALFA.ST']
         });
 
         user.save(function (err) {
@@ -89,6 +125,12 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback',
   passport.authenticate('google-openidconnect', { failureRedirect: '/login', successRedirect: '/' }));
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login', successRedirect: '/' }));
 
 app.use('/login', login);
 app.use('/logout', logout);
