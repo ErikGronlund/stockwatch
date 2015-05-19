@@ -2,6 +2,7 @@
 
 var React = require('react');
 
+var Logout = require('./logout/Logout');
 var Quotes = require('./quotes/Quotes');
 var quoteArrayItems = require('./quote-array-items');
 
@@ -61,6 +62,7 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div>
+        <Logout></Logout>
         <Quotes quotes={this.state.data} ></Quotes>
       </div>
     );
