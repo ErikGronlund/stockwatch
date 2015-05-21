@@ -11,6 +11,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var mongoose = require('mongoose');
+var MongooseStore = require('express-mongoose-store')(session, mongoose);
+
 var User = require('./lib/user/user.js');
 
 var GOOGLE_CLIENT_ID = '37422223575-gbp1smusgb1d6k1m9qjs80s97t6uv5f1.apps.googleusercontent.com';
@@ -36,7 +38,7 @@ app.set('view engine', 'ejs');
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(session({secret: 'stockWatch', saveUninitialized: true, resave: true}));
+app.use(session({secret: 'stockWatch', resave: true, saveUninitialized: true, store: new MongooseStore()}));
 app.use(passport.initialize());
 app.use(passport.session());
 
