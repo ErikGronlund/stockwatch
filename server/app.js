@@ -134,6 +134,27 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login', successRedirect: '/' }));
 
+app.post('/addquote', function (req, res, next) {
+  User.findOne({ id: req.user.id }, function (err, user) {
+      if (err || user === null) {
+        return next(new Error('User not found'));
+      } else if (user !== null) {
+        // add ticker to user
+        // TODO make sure symbol is valid to use.
+        user.tickers.push(req.body.symbol);
+        user.save(function (err) {
+          if (err) {
+            return next(new Error('Failed to add new symbol to database'));
+          } else {
+            res.redirect('/');
+          }
+        });
+      } else {
+        return next(new Error('Unknown error'));
+      }
+    });
+});
+
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/', ensureAuthenticated, stocks);
