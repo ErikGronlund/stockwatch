@@ -2,12 +2,12 @@
 
 var React = require('react');
 
-var Quote = require('../quote/Quote');
+var StockQuote = require('../stock-quote/StockQuote');
 
 module.exports = React.createClass({
   render: function () {
-    var quoteList = this.props.quotes.map(function (quote) {
-      return <Quote data = {quote} />
+    var stockQuoteList = this.props.quotes.map(function (stockQuote) {
+      return <StockQuote data = {stockQuote} />
     });
 
     return (
@@ -18,7 +18,7 @@ module.exports = React.createClass({
           <th>Exchange</th>
           <th>Price</th>
         </tr>
-        {quoteList}
+        {stockQuoteList}
       </table>
     );
   }
