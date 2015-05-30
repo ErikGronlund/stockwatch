@@ -6,12 +6,12 @@ var StockQuote = require('../stock-quote/StockQuote');
 
 module.exports = React.createClass({
   render: function () {
-    var stockQuoteList = this.props.quotes.map(function (stockQuote) {
+    var stockQuoteList = this.props.stockQuotes.map(function (stockQuote) {
       return <StockQuote data = {stockQuote} />
     });
 
     return (
-      <table className="quotes">
+      <table className="stock-quotes">
         <tr>
           <th>Name</th>
           <th>Symbol</th>

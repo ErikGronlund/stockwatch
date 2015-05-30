@@ -4,7 +4,7 @@ var React = require('react');
 
 var Logout = require('./logout/Logout');
 var AddQuote = require('./add-quote/AddQuote');
-var Quotes = require('./quotes/Quotes');
+var StockQuotes = require('./stock-quotes/StockQuotes');
 var quoteArrayItems = require('./quote-array-items');
 
 var YAHOO_FINANCE_URL = 'https://query.yahooapis.com/v1/public/yql';
@@ -18,7 +18,7 @@ function createUrl (tickers) {
   return YAHOO_FINANCE_URL + '?' + createFql(tickers) + PARAMS;
 }
 
-function loadQuotes(url) {
+function loadStockQuotes(url) {
   return new Promise(function (resolve, reject) {
 
     function onload () {
@@ -47,15 +47,15 @@ module.exports = React.createClass({
   },
   componentDidMount: function() {
     var that = this;
-    loadQuotes(createUrl(this.state.tickers)).then(function (result) {
-      var quotes = [];
+    loadStockQuotes(createUrl(this.state.tickers)).then(function (result) {
+      var stockQuotes = [];
       if (!Array.isArray(result)) {
-        quotes.push(result)
+        stockQuotes.push(result)
       } else {
-        quotes = result;
+        stockQuotes = result;
       }
 
-      that.setState({ data: quotes});
+      that.setState({ data: stockQuotes});
     }, function (error) {
       console.log(error);
     });
@@ -64,7 +64,7 @@ module.exports = React.createClass({
     return (
       <div>
         <Logout></Logout>
-        <Quotes quotes={this.state.data} ></Quotes>
+        <StockQuotes stockQuotes={this.state.data} ></StockQuotes>
         <AddQuote></AddQuote>
       </div>
     );
