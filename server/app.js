@@ -21,6 +21,8 @@ var GOOGLE_CLIENT_SECRET = 'aHAqRWXrX_It7bnLMm0h4n0j';
 var FACEBOOK_APP_ID = '697434750383550';
 var FACEBOOK_APP_SECRET = 'ab9c7bb908e306026793b97463b6c1da';
 
+var searchStockSymbol = require('./lib/search-stock-symbol/search-stock-symbol.js');
+
 require("node-jsx").install();
 
 var staticDir = path.resolve(__dirname + '/client');
@@ -139,20 +141,27 @@ app.post('/addquote', function (req, res, next) {
       if (err || user === null) {
         return next(new Error('User not found'));
       } else if (user !== null) {
-        // add ticker to user
-        // TODO make sure symbol is valid to use.
-        user.tickers.push(req.body.symbol);
-        user.save(function (err) {
-          if (err) {
-            return next(new Error('Failed to add new symbol to database'));
-          } else {
-            res.redirect('/');
-          }
-        });
+        if (!!req.body.selectedSymbol) {
+          // add ticker to user
+          user.tickers.push(req.body.selectedSymbol);
+          user.save(function (err) {
+            if (err) {
+              return next(new Error('Failed to add new symbol to database'));
+            } else {
+              res.redirect('/');
+            }
+          });
+        } else {
+          res.redirect('/');
+        }
       } else {
         return next(new Error('Unknown error'));
       }
     });
+});
+
+app.get('/searchsymbol', searchStockSymbol, function(req, res, next) {
+  res.send(req.symbolSearchResult);
 });
 
 app.use('/login', login);
