@@ -21,7 +21,7 @@ var GOOGLE_CLIENT_SECRET = 'aHAqRWXrX_It7bnLMm0h4n0j';
 var FACEBOOK_APP_ID = '697434750383550';
 var FACEBOOK_APP_SECRET = 'ab9c7bb908e306026793b97463b6c1da';
 
-var searchStockSymbol = require('./lib/search-stock-symbol/search-stock-symbol.js');
+var searchMatchingStocks = require('./lib/search-matching-stocks/search-matching-stocks.js');
 
 require("node-jsx").install();
 
@@ -160,7 +160,7 @@ app.post('/addquote', function (req, res, next) {
     });
 });
 
-app.get('/searchsymbol', searchStockSymbol, function(req, res, next) {
+app.get('/searchsymbol', searchMatchingStocks, function(req, res, next) {
   res.send(req.symbolSearchResult);
 });
 

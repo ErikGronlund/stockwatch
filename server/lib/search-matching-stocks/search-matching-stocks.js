@@ -6,12 +6,12 @@ var YAHOO_SYMBOL_LOOKUP_URL = 'http://autoc.finance.yahoo.com/autoc';
 var YAHOO_SYMBOL_LOOKUP_QUERY = '?query='
 var YAHOO_SYMBOL_LOOKUP_PARAMS = '&callback=YAHOO.Finance.SymbolSuggest.ssCallback'
 
-function createUrlFromSymbol(symbol) {
-  return YAHOO_SYMBOL_LOOKUP_URL + YAHOO_SYMBOL_LOOKUP_QUERY + symbol + YAHOO_SYMBOL_LOOKUP_PARAMS;
+function createUrlFromQuery(query) {
+  return YAHOO_SYMBOL_LOOKUP_URL + YAHOO_SYMBOL_LOOKUP_QUERY + query + YAHOO_SYMBOL_LOOKUP_PARAMS;
 }
 
-function searchStockSymbol(req, res, next) {
-  var url = createUrlFromSymbol(req.query.searchParam);
+function searchMatchingStocks(req, res, next) {
+  var url = createUrlFromQuery(req.query.searchParam);
   var body = '';
   http.get(url, function(response) {
     response.on('data', function (d) {
@@ -31,4 +31,4 @@ function searchStockSymbol(req, res, next) {
   });
 }
 
-module.exports = searchStockSymbol;
+module.exports = searchMatchingStocks;
