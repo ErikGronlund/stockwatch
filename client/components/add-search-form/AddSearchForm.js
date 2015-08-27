@@ -38,11 +38,11 @@ module.exports = React.createClass({
     {
       if (this.state.searchResult.length > 0) {
         button =  <div>
-                    <form action="/addquote" method="post">
+                    <form action="/addstock" method="post">
                       <select name="selectedSymbol">
                         { options }
                       </select>
-                      <button name="addQuote" type="submit" >Add stock symbol</button>
+                      <button name="addStock" type="submit" >Add stock symbol</button>
                     </form>
                   </div>;
       } else {
