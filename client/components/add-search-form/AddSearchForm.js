@@ -6,13 +6,13 @@ var financeApi = require('../yahoo-finance-api');
 
 module.exports = React.createClass({
   getInitialState: function() {
-    return {showAddButton: false, searchResult: []};
+    return {searchResult: []};
   },
   searchStock: function (req) {
     var that = this;
     function onload () {
       var json = JSON.parse(this.responseText);
-      that.setState({showAddButton: json.length > 0, searchResult: json});
+      that.setState({searchResult: json});
     }
 
     function onerror() {
@@ -36,7 +36,7 @@ module.exports = React.createClass({
     });
 
     {
-      if (this.state.showAddButton) {
+      if (this.state.searchResult.length > 0) {
         button =  <div>
                     <form action="/addquote" method="post">
                       <select name="selectedSymbol">
