@@ -3,7 +3,7 @@
 var React = require('react');
 
 var Logout = require('./logout/Logout');
-var AddQuote = require('./add-quote/AddQuote');
+var AddSearchForm = require('./add-search-form/AddSearchForm');
 var StockQuotes = require('./stock-quotes/StockQuotes');
 
 var financeApi = require('./yahoo-finance-api');
@@ -35,7 +35,7 @@ module.exports = React.createClass({
       <div>
         <Logout></Logout>
         <StockQuotes stockQuotes={this.state.data} ></StockQuotes>
-        <AddQuote></AddQuote>
+        <AddSearchForm></AddSearchForm>
       </div>
     );
   }
