@@ -24,7 +24,7 @@ module.exports = React.createClass({
     var xhr = new XMLHttpRequest();
     xhr.onload = onload;
     xhr.onerror = onerror;
-    xhr.open('get', '/searchsymbol?searchParam=' + searchValue, true);
+    xhr.open('get', '/searchstock?searchParam=' + searchValue, true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send();
   },

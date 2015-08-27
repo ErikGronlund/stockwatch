@@ -160,7 +160,7 @@ app.post('/addquote', function (req, res, next) {
     });
 });
 
-app.get('/searchsymbol', searchMatchingStocks, function(req, res, next) {
+app.get('/searchstock', searchMatchingStocks, function(req, res, next) {
   res.send(req.stockSearchResult);
 });
 
