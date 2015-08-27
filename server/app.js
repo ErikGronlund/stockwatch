@@ -161,7 +161,7 @@ app.post('/addquote', function (req, res, next) {
 });
 
 app.get('/searchsymbol', searchMatchingStocks, function(req, res, next) {
-  res.send(req.symbolSearchResult);
+  res.send(req.stockSearchResult);
 });
 
 app.use('/login', login);

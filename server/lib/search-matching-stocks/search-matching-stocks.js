@@ -22,7 +22,7 @@ function searchMatchingStocks(req, res, next) {
       // remove json prefix string sent from yahoo before returning result
       var jsonResponseString = body.substring(body.indexOf('(') + 1, body.lastIndexOf(')'));
       var result = JSON.parse(jsonResponseString);
-      req.symbolSearchResult = result.ResultSet.Result;
+      req.stockSearchResult = result.ResultSet.Result;
       next();
     });
 
