@@ -39,17 +39,16 @@ module.exports = React.createClass({
       if (this.state.showAddButton) {
         button =  <div>
                     <form action="/addquote" method="post">
-                      Add stock to list:
                       <select name="selectedSymbol">
                         { options }
                       </select>
-                      <button name="addQuote" type="submit" >Add</button>
+                      <button name="addQuote" type="submit" >Add stock symbol</button>
                     </form>
                   </div>;
       } else {
         button =  <div>
-                      Search stock symbol: <input type="text" name="symbol" id="searchField"></input>
-                      <button name="searchSymbol" onClick={this.searchSymbol}>Search</button>
+                      <input type="text" name="symbol" id="searchField"></input>
+                      <button name="searchSymbol" onClick={this.searchSymbol}>Search for stock</button>
                   </div>;
       }
     }
