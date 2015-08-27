@@ -8,7 +8,7 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {showAddButton: false, searchResult: []};
   },
-  searchSymbol: function (req) {
+  searchStock: function (req) {
     var that = this;
     function onload () {
       var json = JSON.parse(this.responseText);
@@ -16,7 +16,7 @@ module.exports = React.createClass({
     }
 
     function onerror() {
-      reject('failed searching symbol from server');
+      reject('failed search matching stocks from server');
     }
 
     var searchValue = encodeURIComponent(document.getElementById('searchField').value);
@@ -47,8 +47,8 @@ module.exports = React.createClass({
                   </div>;
       } else {
         button =  <div>
-                      <input type="text" name="symbol" id="searchField"></input>
-                      <button name="searchSymbol" onClick={this.searchSymbol}>Search for stock</button>
+                      <input type="text" name="searchField" id="searchField"></input>
+                      <button name="searchStock" onClick={this.searchStock}>Search for stock</button>
                   </div>;
       }
     }
