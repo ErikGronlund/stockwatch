@@ -12,12 +12,12 @@ module.exports = React.createClass({
   getInitialState: function() {
     return {
       data: [],
-      tickers: this.props.tickers || []
+      stockSymbols: this.props.stockSymbols || []
     };
   },
   componentDidMount: function() {
     var that = this;
-    financeApi.loadStockQuotes(this.state.tickers).then(function (result) {
+    financeApi.loadStockQuotes(this.state.stockSymbols).then(function (result) {
       var stockQuotes = [];
       if (!Array.isArray(result)) {
         stockQuotes.push(result)

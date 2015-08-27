@@ -3,7 +3,7 @@ var mongoose = require('mongoose')
 var User = mongoose.model('User', {
   id: Number,
   name: String,
-  tickers: Array
+  stockSymbols: Array
 });
 
 module.exports = User;

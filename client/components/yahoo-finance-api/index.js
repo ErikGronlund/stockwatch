@@ -5,12 +5,12 @@ var quoteArrayItems = require('../quote-array-items');
 var YAHOO_FINANCE_URL = 'https://query.yahooapis.com/v1/public/yql';
 var YAHOO_FINANCE_PARAMS = '&format=json&env=http://datatables.org/alltables.env&callback=';
 
-function createFql(tickers) {
-  return 'q=select * from yahoo.finance.quotes where symbol in (' + quoteArrayItems(tickers).toString() + ')';
+function createFql(symbols) {
+  return 'q=select * from yahoo.finance.quotes where symbol in (' + quoteArrayItems(symbols).toString() + ')';
 }
 
-function createUrl (tickers) {
-  return YAHOO_FINANCE_URL + '?' + createFql(tickers) + YAHOO_FINANCE_PARAMS;
+function createUrl (symbols) {
+  return YAHOO_FINANCE_URL + '?' + createFql(symbols) + YAHOO_FINANCE_PARAMS;
 }
 
 function loadStockQuotesUrl(url) {
@@ -33,8 +33,8 @@ function loadStockQuotesUrl(url) {
   });
 }
 
-function loadStockQuotes(tickers) {
-  return loadStockQuotesUrl(createUrl(tickers));
+function loadStockQuotes(symbols) {
+  return loadStockQuotesUrl(createUrl(symbols));
 }
 
 module.exports = {

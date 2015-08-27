@@ -61,7 +61,7 @@ passport.use(new StrategyGoogle({
         var user = new User({
           id: profile._json.id,
           name: profile._json.displayName,
-          tickers: []
+          stockSymbols: []
         });
 
         user.save(function (err) {
@@ -94,7 +94,7 @@ passport.use(new StrategyFacebook({
         var user = new User({
           id: profile._json.id,
           name: profile._json.name,
-          tickers: ['FB', 'BOL.ST', 'ALFA.ST']
+          stockSymbols: ['FB', 'BOL.ST', 'ALFA.ST']
         });
 
         user.save(function (err) {
@@ -142,8 +142,8 @@ app.post('/addstock', function (req, res, next) {
         return next(new Error('User not found'));
       } else if (user !== null) {
         if (!!req.body.selectedSymbol) {
-          // add ticker to user
-          user.tickers.push(req.body.selectedSymbol);
+          // add stock symbol to user
+          user.stockSymbols.push(req.body.selectedSymbol);
           user.save(function (err) {
             if (err) {
               return next(new Error('Failed to add new symbol to database'));
