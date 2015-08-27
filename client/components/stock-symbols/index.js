@@ -1,6 +1,6 @@
 'use strict';
 
-var tickers = [
+var stockSymbols = [
   'ALFA.ST', // Alfa Laval
   'AXFO.ST', // Axfood
   'BOL.ST', // Boliden
@@ -19,4 +19,4 @@ var tickers = [
   'THULE.ST' // Thule
 ];
 
-module.exports = tickers;
+module.exports = stockSymbols;
