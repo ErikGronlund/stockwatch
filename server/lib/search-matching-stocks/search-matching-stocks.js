@@ -4,7 +4,10 @@ var http = require('http');
 
 var YAHOO_SYMBOL_LOOKUP_URL = 'http://autoc.finance.yahoo.com/autoc';
 var YAHOO_SYMBOL_LOOKUP_QUERY = '?query='
-var YAHOO_SYMBOL_LOOKUP_PARAMS = '&callback=YAHOO.Finance.SymbolSuggest.ssCallback'
+var CALLBACK_PARAM = '&callback=YAHOO.Finance.SymbolSuggest.ssCallback';
+var REGION_US_PARAM = '&region=us';
+var LANG_US_PARAM = '&lang=en-US';
+var YAHOO_SYMBOL_LOOKUP_PARAMS = CALLBACK_PARAM + REGION_US_PARAM + LANG_US_PARAM;
 
 function createUrlFromQuery(query) {
   return YAHOO_SYMBOL_LOOKUP_URL + YAHOO_SYMBOL_LOOKUP_QUERY + query + YAHOO_SYMBOL_LOOKUP_PARAMS;
