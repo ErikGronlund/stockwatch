@@ -30,6 +30,7 @@ var staticDir = path.resolve(__dirname + '/client');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 var stocks = require('./routes/stocks');
+var addStock = require('./routes/add-stock')(User);
 
 var passport = require('passport');
 
@@ -136,34 +137,11 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login', successRedirect: '/' }));
 
-app.post('/addstock', function (req, res, next) {
-  User.findOne({ id: req.user.id }, function (err, user) {
-      if (err || user === null) {
-        return next(new Error('User not found'));
-      } else if (user !== null) {
-        if (!!req.body.selectedSymbol) {
-          // add stock symbol to user
-          user.stockSymbols.push(req.body.selectedSymbol);
-          user.save(function (err) {
-            if (err) {
-              return next(new Error('Failed to add new symbol to database'));
-            } else {
-              res.redirect('/');
-            }
-          });
-        } else {
-          res.redirect('/');
-        }
-      } else {
-        return next(new Error('Unknown error'));
-      }
-    });
-});
-
 app.get('/searchstock', searchMatchingStocks, function(req, res, next) {
   res.send(req.stockSearchResult);
 });
 
+app.use('/addstock', addStock);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/', ensureAuthenticated, stocks);
