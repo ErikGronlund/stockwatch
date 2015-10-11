@@ -22,6 +22,7 @@ var FACEBOOK_APP_ID = '697434750383550';
 var FACEBOOK_APP_SECRET = 'ab9c7bb908e306026793b97463b6c1da';
 
 var searchMatchingStocks = require('./lib/search-matching-stocks/search-matching-stocks.js');
+var ensureAuthenticated = require('./lib/ensure-authenticated/ensure-authenticated.js');
 
 require("node-jsx").install();
 
@@ -145,11 +146,5 @@ app.use('/addstock', addStock);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/', ensureAuthenticated, stocks);
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  req.session.error = 'Please sign in!';
-  res.redirect('/login');
-}
 
 module.exports = app;
