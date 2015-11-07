@@ -5,7 +5,9 @@ var React = require('react');
 module.exports = React.createClass({
   render: function () {
     return (
-      <a href="/logout">Logout</a>
+      <div className="button">
+        <a href="/logout">Logout</a>
+      </div>
     );
   }
 });
