@@ -1,6 +1,6 @@
 {
-  "name": "gulp-browserify-project",
-  "description": "Basic project setup using gulp and browserify",
+  "name": "stockwatch",
+  "description": "Simple lab project for watching stock prizes.",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
