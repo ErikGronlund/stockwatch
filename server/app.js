@@ -15,6 +15,7 @@ var MongooseStore = require('express-mongoose-store')(session, mongoose);
 
 var User = require('./lib/user/user.js');
 
+// TODO move secrets to ENV
 var GOOGLE_CLIENT_ID = '37422223575-gbp1smusgb1d6k1m9qjs80s97t6uv5f1.apps.googleusercontent.com';
 var GOOGLE_CLIENT_SECRET = 'aHAqRWXrX_It7bnLMm0h4n0j';
 
